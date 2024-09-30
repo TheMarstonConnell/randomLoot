@@ -1,27 +1,9 @@
 package dev.marston.randomloot.loot.modifiers;
 
-import java.util.HashMap;
-import java.util.Set;
-
 import dev.marston.randomloot.RandomLootMod;
-import dev.marston.randomloot.loot.modifiers.breakers.Attracting;
-import dev.marston.randomloot.loot.modifiers.breakers.Explode;
-import dev.marston.randomloot.loot.modifiers.breakers.Learning;
-import dev.marston.randomloot.loot.modifiers.breakers.Melting;
-import dev.marston.randomloot.loot.modifiers.breakers.Veiny;
-import dev.marston.randomloot.loot.modifiers.holders.Effect;
-import dev.marston.randomloot.loot.modifiers.holders.Hasty;
-import dev.marston.randomloot.loot.modifiers.holders.Healing;
-import dev.marston.randomloot.loot.modifiers.holders.OreFinder;
-import dev.marston.randomloot.loot.modifiers.holders.Rainy;
-import dev.marston.randomloot.loot.modifiers.holders.TreasureFinder;
-import dev.marston.randomloot.loot.modifiers.hurter.Bezerk;
-import dev.marston.randomloot.loot.modifiers.hurter.Charging;
-import dev.marston.randomloot.loot.modifiers.hurter.Combo;
-import dev.marston.randomloot.loot.modifiers.hurter.Critical;
-import dev.marston.randomloot.loot.modifiers.hurter.Draining;
-import dev.marston.randomloot.loot.modifiers.hurter.Fire;
-import dev.marston.randomloot.loot.modifiers.hurter.HurtEffect;
+import dev.marston.randomloot.loot.modifiers.breakers.*;
+import dev.marston.randomloot.loot.modifiers.holders.*;
+import dev.marston.randomloot.loot.modifiers.hurter.*;
 import dev.marston.randomloot.loot.modifiers.stats.Busted;
 import dev.marston.randomloot.loot.modifiers.users.DirtPlace;
 import dev.marston.randomloot.loot.modifiers.users.FireBall;
@@ -29,6 +11,9 @@ import dev.marston.randomloot.loot.modifiers.users.FirePlace;
 import dev.marston.randomloot.loot.modifiers.users.TorchPlace;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffects;
+
+import java.util.HashMap;
+import java.util.Set;
 
 public class ModifierRegistry {
 

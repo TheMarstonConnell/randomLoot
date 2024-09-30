@@ -1,10 +1,7 @@
 package dev.marston.randomloot.recipes;
 
-import java.nio.charset.Charset;
-
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-
 import dev.marston.randomloot.loot.LootRegistry;
 import dev.marston.randomloot.loot.LootUtils;
 import dev.marston.randomloot.loot.modifiers.Modifier;
@@ -17,6 +14,8 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SmithingRecipe;
 import net.minecraft.world.level.Level;
+
+import java.nio.charset.Charset;
 
 public class TraitAdditionRecipe implements SmithingRecipe {
 	public static Serializer SERIALIZER = null;

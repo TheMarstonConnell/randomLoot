@@ -1,9 +1,5 @@
 package dev.marston.randomloot.loot;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import dev.marston.randomloot.loot.modifiers.Modifier;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
@@ -12,7 +8,6 @@ import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.ComponentContents;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.StatType;
@@ -26,6 +21,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class LootCase extends Item {
 
@@ -100,7 +98,7 @@ public class LootCase extends Item {
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tipList, TooltipFlag flag) {
 
-		MutableComponent comp = MutableComponent.create(ComponentContents.EMPTY);
+		MutableComponent comp = Component.empty();
 		comp.append("Right-click for loot!");
 		comp = comp.withStyle(ChatFormatting.GRAY);
 

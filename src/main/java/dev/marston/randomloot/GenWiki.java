@@ -1,22 +1,17 @@
 package dev.marston.randomloot;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import dev.marston.randomloot.loot.modifiers.Modifier;
+import dev.marston.randomloot.loot.modifiers.ModifierRegistry;
+import net.minecraft.resources.ResourceLocation;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-
-import dev.marston.randomloot.loot.modifiers.Modifier;
-import dev.marston.randomloot.loot.modifiers.ModifierRegistry;
-import net.minecraft.resources.ResourceLocation;
 
 public class GenWiki {
 

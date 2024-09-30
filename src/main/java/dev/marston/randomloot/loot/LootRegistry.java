@@ -1,8 +1,8 @@
 package dev.marston.randomloot.loot;
 
-import java.util.HashMap;
-
 import net.minecraft.world.item.Item;
+
+import java.util.HashMap;
 
 public class LootRegistry {
 

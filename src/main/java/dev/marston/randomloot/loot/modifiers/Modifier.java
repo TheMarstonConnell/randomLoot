@@ -1,25 +1,23 @@
 package dev.marston.randomloot.loot.modifiers;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import dev.marston.randomloot.loot.LootItem.ToolType;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.ComponentContents;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
+
 public interface Modifier {
 
 	public static MutableComponent makeComp(String text, ChatFormatting color) {
-		MutableComponent comp = MutableComponent.create(ComponentContents.EMPTY);
+		MutableComponent comp = Component.empty();
 		comp.append(text);
 		comp = comp.withStyle(color);
 
@@ -27,7 +25,7 @@ public interface Modifier {
 	}
 
 	public static MutableComponent makeComp(String text, String color) {
-		MutableComponent comp = MutableComponent.create(ComponentContents.EMPTY);
+		MutableComponent comp = Component.empty();
 		comp.append(text);
 		comp = comp.withStyle(ChatFormatting.getByName(color));
 
@@ -35,7 +33,7 @@ public interface Modifier {
 	}
 
 	public static MutableComponent makeComp(Component compIn) {
-		MutableComponent comp = MutableComponent.create(ComponentContents.EMPTY);
+		MutableComponent comp = Component.empty();
 		comp.append(compIn);
 		return comp;
 	}

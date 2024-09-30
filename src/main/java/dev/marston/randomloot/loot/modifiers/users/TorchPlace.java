@@ -1,9 +1,5 @@
 package dev.marston.randomloot.loot.modifiers.users;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import dev.marston.randomloot.loot.LootItem.ToolType;
 import dev.marston.randomloot.loot.modifiers.Modifier;
 import dev.marston.randomloot.loot.modifiers.ModifierRegistry;
@@ -39,6 +35,9 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.shapes.CollisionContext;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class TorchPlace implements UseModifier {
 	private String name;

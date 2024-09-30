@@ -1,9 +1,5 @@
 package dev.marston.randomloot.loot.modifiers.breakers;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import dev.marston.randomloot.RandomLootMod;
 import dev.marston.randomloot.loot.LootItem.ToolType;
 import dev.marston.randomloot.loot.modifiers.BlockBreakModifier;
@@ -25,6 +21,9 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class Melting implements BlockBreakModifier {
 
@@ -51,7 +50,7 @@ public class Melting implements BlockBreakModifier {
 
 		Level l = player.level();
 
-		AABB box = new AABB(pos.east().south().below(), pos.west().north().above());
+		AABB box = new AABB(pos.east().south().below().getCenter(), pos.west().north().above().getCenter());
 
 		RegistryAccess access = l.registryAccess();
 		RecipeManager manager = l.getRecipeManager();

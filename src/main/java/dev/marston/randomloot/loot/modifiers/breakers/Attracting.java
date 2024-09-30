@@ -1,9 +1,5 @@
 package dev.marston.randomloot.loot.modifiers.breakers;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import dev.marston.randomloot.loot.LootItem.ToolType;
 import dev.marston.randomloot.loot.modifiers.BlockBreakModifier;
 import dev.marston.randomloot.loot.modifiers.Modifier;
@@ -17,6 +13,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class Attracting implements BlockBreakModifier {
 
@@ -43,7 +42,9 @@ public class Attracting implements BlockBreakModifier {
 
 		Level l = player.level();
 
-		AABB box = new AABB(pos.east().south().below(), pos.west().north().above());
+
+
+		AABB box = new AABB(pos.east().south().below().getCenter(), pos.west().north().above().getCenter());
 
 		Thread thread = new Thread() {
 			public void run() {

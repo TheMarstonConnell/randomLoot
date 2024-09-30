@@ -1,30 +1,30 @@
 package dev.marston.randomloot;
 
+import dev.marston.randomloot.loot.modifiers.Modifier;
+import dev.marston.randomloot.loot.modifiers.ModifierRegistry;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.config.ModConfigEvent;
+import net.neoforged.neoforge.common.ModConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec.BooleanValue;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import dev.marston.randomloot.loot.modifiers.Modifier;
-import dev.marston.randomloot.loot.modifiers.ModifierRegistry;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.config.ModConfigEvent;
-
 @Mod.EventBusSubscriber(modid = RandomLootMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class Config {
-	private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
+	private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
-	private static ForgeConfigSpec.DoubleValue CASE_CHANCE;
+	private static ModConfigSpec.DoubleValue CASE_CHANCE;
 
-	private static ForgeConfigSpec.DoubleValue MOD_CHANCE;
+	private static ModConfigSpec.DoubleValue MOD_CHANCE;
 
-	private static ForgeConfigSpec.DoubleValue GOODNESS;
+	private static ModConfigSpec.DoubleValue GOODNESS;
 
-	static final ForgeConfigSpec SPEC = build();
+	static final ModConfigSpec SPEC = build();
 
-	public static ForgeConfigSpec build() {
+	public static ModConfigSpec build() {
 		init();
 		return BUILDER.build();
 	}
@@ -33,7 +33,7 @@ public class Config {
 	public static double ModChance;
 	public static double Goodness;
 
-	private static Map<String, ForgeConfigSpec.BooleanValue> MODIFIERS_ENABLED;
+	private static Map<String, ModConfigSpec.BooleanValue> MODIFIERS_ENABLED;
 	private static Map<String, Boolean> ModsEnabled;
 
 	public static void init() {
@@ -45,7 +45,7 @@ public class Config {
 		BUILDER.pop();
 
 		BUILDER.push("Modifiers Enabled");
-		MODIFIERS_ENABLED = new HashMap<String, ForgeConfigSpec.BooleanValue>();
+		MODIFIERS_ENABLED = new HashMap<String, ModConfigSpec.BooleanValue>();
 
 		for (Entry<String, Modifier> entry : ModifierRegistry.Modifiers.entrySet()) {
 			String key = entry.getKey();

@@ -1,8 +1,8 @@
 package dev.marston.randomloot.loot;
 
-import java.util.Random;
-
 import dev.marston.randomloot.Globals;
+
+import java.util.Random;
 
 public class NameGenerator {
 	public static final String[] Prefixes = new String[] { "Fyten", "Fetter", "Red", "Tita", "Ty", "A", "Demu", "Tra",

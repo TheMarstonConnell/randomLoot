@@ -1,9 +1,5 @@
 package dev.marston.randomloot.loot.modifiers.breakers;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import dev.marston.randomloot.loot.LootItem.ToolType;
 import dev.marston.randomloot.loot.LootUtils;
 import dev.marston.randomloot.loot.modifiers.BlockBreakModifier;
@@ -17,6 +13,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class Learning implements BlockBreakModifier {
 

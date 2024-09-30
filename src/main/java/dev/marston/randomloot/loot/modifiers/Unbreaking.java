@@ -1,9 +1,5 @@
 package dev.marston.randomloot.loot.modifiers;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import dev.marston.randomloot.loot.LootItem.ToolType;
 import dev.marston.randomloot.loot.LootUtils;
 import net.minecraft.ChatFormatting;
@@ -11,6 +7,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.level.Level;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class Unbreaking implements Modifier {
 

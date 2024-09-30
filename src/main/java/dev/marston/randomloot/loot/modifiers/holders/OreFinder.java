@@ -1,10 +1,5 @@
 package dev.marston.randomloot.loot.modifiers.holders;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import dev.marston.randomloot.RandomLootMod;
 import dev.marston.randomloot.loot.LootItem.ToolType;
 import dev.marston.randomloot.loot.modifiers.HoldModifier;
@@ -24,10 +19,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.event.TickEvent.ServerTickEvent;
-import net.minecraftforge.event.server.ServerStoppingEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.event.TickEvent.ServerTickEvent;
+import net.neoforged.neoforge.event.server.ServerStoppingEvent;
+
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Mod.EventBusSubscriber(modid = RandomLootMod.MODID)
 public class OreFinder implements HoldModifier {

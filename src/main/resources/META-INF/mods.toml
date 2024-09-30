@@ -1,25 +1,24 @@
-modLoader="javafml" 
-loaderVersion="[46,)" 
-license="GNU General Public License v3.0"
+modLoader="javafml"
+loaderVersion="${loader_version_range}" #mandatory
+license="${mod_license}"
 [[mods]]  
     modId="randomloot"
     version="0.0.0" 
     displayName="RandomLoot 2" 
     displayURL="https://github.com/TheMarstonConnell/randomloot" #optional
-    logoFile="assets/randomloot/logo.png" #optional
+    logoFile="logo.png" #optional
     #credits="" #optional
-    authors="Marston Connell" 
-
-# The description text for the mod (multi line!) (#mandatory)
-description='''An RPG style loot system built from the ground up to make Minecraft loot feel more personal.'''
+    authors="Marston Connell"
+    # The description text for the mod (multi line!) (#mandatory)
+    description='''${mod_description}'''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-[[dependencies.randomloot]] #optional
+[[dependencies.${mod_id}]] #optional
     # the modid of the dependency
-    modId="forge" #mandatory
+    modId="neoforge" #mandatory
+    type="required" #mandatory
     # Does this dependency have to exist - if not, ordering below must be specified
-    mandatory=true #mandatory
     # The version range of the dependency
-    versionRange="${forge_version_range}" #mandatory
+    versionRange="${neo_version_range}" #mandatory
     # An ordering relationship for the dependency - BEFORE or AFTER required if the dependency is not mandatory
     # BEFORE - This mod is loaded BEFORE the dependency
     # AFTER - This mod is loaded AFTER the dependency
@@ -27,9 +26,9 @@ description='''An RPG style loot system built from the ground up to make Minecra
     # Side this dependency is applied on - BOTH, CLIENT, or SERVER
     side="BOTH"
 # Here's another dependency
-[[dependencies.randomloot]]
+[[dependencies.${mod_id}]]
     modId="minecraft"
-    mandatory=true
+    type="required" #mandatory
     # This version range declares a minimum of the current minecraft version up to but not including the next major version
     versionRange="${minecraft_version_range}"
     ordering="NONE"

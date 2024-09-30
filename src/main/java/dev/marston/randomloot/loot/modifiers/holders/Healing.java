@@ -1,20 +1,18 @@
 package dev.marston.randomloot.loot.modifiers.holders;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import dev.marston.randomloot.loot.LootItem.ToolType;
 import dev.marston.randomloot.loot.modifiers.HoldModifier;
 import dev.marston.randomloot.loot.modifiers.Modifier;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.ComponentContents;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class Healing implements HoldModifier {
 
@@ -110,7 +108,7 @@ public class Healing implements HoldModifier {
 			stack.setDamageValue(Math.max(stack.getDamageValue() - 1, 0));
 
 			if (f < power / 5) {
-				MutableComponent comp = MutableComponent.create(ComponentContents.EMPTY);
+				MutableComponent comp = Component.empty();
 
 				comp.append("pssst...");
 				comp = comp.withStyle(ChatFormatting.GRAY);

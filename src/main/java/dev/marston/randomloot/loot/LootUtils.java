@@ -1,13 +1,6 @@
 package dev.marston.randomloot.loot;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import com.google.gson.JsonObject;
-
 import dev.marston.randomloot.Config;
 import dev.marston.randomloot.loot.LootItem.ToolType;
 import dev.marston.randomloot.loot.modifiers.Modifier;
@@ -28,6 +21,12 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
 
 public class LootUtils {
 
@@ -299,7 +298,7 @@ public class LootUtils {
 		if (player != null) {
 			Holder<Biome> biome = level.getBiome(player.blockPosition());
 
-			Biome b = biome.get();
+			Biome b = biome.value();
 
 			temp = b.getBaseTemperature();
 

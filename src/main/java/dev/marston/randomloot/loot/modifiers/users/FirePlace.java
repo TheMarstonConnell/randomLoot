@@ -1,9 +1,5 @@
 package dev.marston.randomloot.loot.modifiers.users;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import dev.marston.randomloot.loot.LootItem.ToolType;
 import dev.marston.randomloot.loot.modifiers.Modifier;
 import dev.marston.randomloot.loot.modifiers.ModifierRegistry;
@@ -31,6 +27,9 @@ import net.minecraft.world.level.block.CandleCakeBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class FirePlace implements UseModifier {
 	private String name;

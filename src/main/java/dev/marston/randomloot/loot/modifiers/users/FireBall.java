@@ -1,9 +1,5 @@
 package dev.marston.randomloot.loot.modifiers.users;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import dev.marston.randomloot.loot.LootItem.ToolType;
 import dev.marston.randomloot.loot.modifiers.Modifier;
 import dev.marston.randomloot.loot.modifiers.ModifierRegistry;
@@ -19,6 +15,9 @@ import net.minecraft.world.entity.projectile.LargeFireball;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class FireBall implements UseModifier {
 	private String name;

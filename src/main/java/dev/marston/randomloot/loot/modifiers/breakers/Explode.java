@@ -1,9 +1,5 @@
 package dev.marston.randomloot.loot.modifiers.breakers;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import dev.marston.randomloot.loot.LootItem.ToolType;
 import dev.marston.randomloot.loot.modifiers.BlockBreakModifier;
 import dev.marston.randomloot.loot.modifiers.Modifier;
@@ -15,6 +11,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.Level.ExplosionInteraction;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class Explode implements BlockBreakModifier {
 
@@ -41,8 +40,9 @@ public class Explode implements BlockBreakModifier {
 
 		Level l = player.level();
 
-		l.explode(player, null, null, pos.getX(), pos.getY(), pos.getZ(), power, false, ExplosionInteraction.BLOCK,
-				false);
+		l.explode(player, null, null, pos.getX(), pos.getY(), pos.getZ(), power, false, ExplosionInteraction.BLOCK
+        );
+
 
 		return false;
 	}

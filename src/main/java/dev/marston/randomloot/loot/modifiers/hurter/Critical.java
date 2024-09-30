@@ -1,9 +1,5 @@
 package dev.marston.randomloot.loot.modifiers.hurter;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import dev.marston.randomloot.loot.LootItem;
 import dev.marston.randomloot.loot.LootItem.ToolType;
 import dev.marston.randomloot.loot.LootUtils;
@@ -18,6 +14,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class Critical implements EntityHurtModifier {
 	private String name;
