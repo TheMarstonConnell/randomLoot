@@ -1,0 +1,88 @@
+name: 1.20 Issue Report
+description: Report an issue with the 1.20 version of Random Loot
+title: 1.20 Issue Report
+labels: [1.20, bug]
+assignees: TheMarstonConnell
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please note that 1.20 versions of the mod are in alpha, so are subject to change. Before submitting an issue, please search the following links to make sure your issue is not covered:
+                
+        Please fill in the following template to report your issue.
+        
+  - type: markdown
+    attributes:
+      value: "## Versions"
+  
+  - type: input
+    id: minecraft-version
+    attributes:
+      label: Minecraft Version
+      value: 1.20.2
+    validations:
+      required: true
+  - type: input
+    id: forge-version
+    attributes:
+      label: Forge Version
+      placeholder: "Ex: 48.1.0"
+    validations:
+      required: true
+    validations:
+      required: true
+  - type: input
+    id: mod-version
+    attributes:
+      label: "Random Loot Mod Version"
+      description: "'Latest' is not a valid answer, write an exact version number"
+    validations:
+      required: true
+  
+ 
+  - type: markdown
+    attributes:
+      value: "## Issue Description"
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe your issue
+    validations:
+      required: true
+  
+  - type: input
+    id: crash-report
+    attributes:
+      label: Crash Report
+      description: Paste a link to the crash report, if present
+    validations:
+      required: false
+      
+  - type: textarea
+    id: other-mods
+    attributes:
+      label: Other mods
+      description: List the smallest set of mods you have used to reproduce this issue. Please do not list a modpack name unless the modpack is public
+    validations:
+      required: true
+        
+        
+  - type: markdown
+    attributes:
+      value: "## Confirm the following"
+      
+  - type: dropdown
+    id: performance-enhancers
+    attributes:
+      label: "Performance Enchancers"
+      description: "Select all that you were using when you reproduced the issue. Please attempt to reproduce the issue without them."
+      multiple: true
+      options:
+        - 'Optifine'
+        - 'Performant'
+        - 'Rubidium/Embeddium'
+        - 'Other (specify under other mods)'
+        - 'None of the above'
+    validations:
+      required: true

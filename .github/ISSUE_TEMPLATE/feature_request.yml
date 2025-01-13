@@ -1,0 +1,16 @@
+name: Feature request
+description: Suggest an idea for this project
+title: Feature Request
+labels: [enhancement]
+assignees: TheMarstonConnell
+body:
+  - type: markdown
+    attributes:
+      value: "## Feature Description"
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Explain your feature
+    validations:
+      required: true
