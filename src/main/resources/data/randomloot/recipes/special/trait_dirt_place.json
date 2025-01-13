@@ -1,0 +1,8 @@
+{
+  "type": "randomloot:trait_change",
+  "item": {
+    "count": 1,
+    "item": "minecraft:dirt"
+  },
+  "trait": "dirt_place"
+}
