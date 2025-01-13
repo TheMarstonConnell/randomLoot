@@ -5,9 +5,7 @@ import dev.marston.randomloot.component.ModDataComponents;
 import dev.marston.randomloot.items.ModItems;
 import dev.marston.randomloot.loot.LootUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Blocks;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -47,6 +45,8 @@ public class RandomLoot
         modEventBus.addListener(ModItems::addCreative);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+
+        GenWiki.genWiki();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
