@@ -4,7 +4,9 @@ import com.mojang.logging.LogUtils;
 import dev.marston.randomloot.component.ModDataComponents;
 import dev.marston.randomloot.items.ModItems;
 import dev.marston.randomloot.loot.LootUtils;
+import dev.marston.randomloot.recipes.Recipies;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -40,6 +42,7 @@ public class RandomLoot
         ModDataComponents.register(modEventBus);
 
         ModItems.register(modEventBus);
+        Recipies.register(modEventBus);
 
         NeoForge.EVENT_BUS.register(this);
         modEventBus.addListener(ModItems::addCreative);
