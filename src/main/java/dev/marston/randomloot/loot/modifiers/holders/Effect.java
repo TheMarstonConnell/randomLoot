@@ -6,6 +6,7 @@ import dev.marston.randomloot.loot.modifiers.HoldModifier;
 import dev.marston.randomloot.loot.modifiers.Modifier;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -25,10 +26,10 @@ public class Effect implements HoldModifier {
 	private int power;
 	private String tagname;
 	private final static String POWER = "power";
-	private MobEffect effect;
+	private Holder<MobEffect> effect;
 	private int duration;
 
-	public Effect(String name, String tagname, int power, int duration, MobEffect effect) {
+	public Effect(String name, String tagname, int power, int duration, Holder<MobEffect> effect) {
 		this.name = name;
 		this.effect = effect;
 		this.power = 0;
@@ -36,7 +37,7 @@ public class Effect implements HoldModifier {
 		this.duration = duration;
 	}
 
-	public Effect(String name, String tagname, int duration, MobEffect effect) {
+	public Effect(String name, String tagname, int duration, Holder<MobEffect> effect) {
 		this(name, tagname, 0, duration, effect);
 	}
 
@@ -75,7 +76,7 @@ public class Effect implements HoldModifier {
 
 	@Override
 	public String color() {
-		int color = effect.getColor();
+		int color = effect.value().getColor();
 		ChatFormatting format = ChatFormatting.getById(color);
 		if (format == null) {
 			return ChatFormatting.LIGHT_PURPLE.getName();
@@ -85,7 +86,7 @@ public class Effect implements HoldModifier {
 
 	@Override
 	public String description() {
-		return "While holding the tool, get the " + I18n.get(effect.getDisplayName().getString()).toLowerCase() + " "
+		return "While holding the tool, get the " + I18n.get(effect.value().getDisplayName().getString()).toLowerCase() + " "
 				+ LootUtils.roman(this.power + 1) + " effect.";
 	}
 
@@ -98,7 +99,7 @@ public class Effect implements HoldModifier {
 	}
 
 	@Override
-	public Component writeDetailsToLore(@Nullable Level level) {
+	public Component writeDetailsToLore() {
 
 		return null;
 	}

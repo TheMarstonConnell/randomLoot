@@ -3,6 +3,7 @@ package dev.marston.randomloot;
 import dev.marston.randomloot.loot.modifiers.Modifier;
 import dev.marston.randomloot.loot.modifiers.ModifierRegistry;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
@@ -12,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-@Mod.EventBusSubscriber(modid = RandomLootMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = RandomLootMod.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class Config {
 	private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 

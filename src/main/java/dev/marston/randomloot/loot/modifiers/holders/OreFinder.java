@@ -20,15 +20,16 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.event.TickEvent.ServerTickEvent;
 import net.neoforged.neoforge.event.server.ServerStoppingEvent;
+import net.neoforged.neoforge.event.tick.ServerTickEvent;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid = RandomLootMod.MODID)
+@EventBusSubscriber(modid = RandomLootMod.MODID)
 public class OreFinder implements HoldModifier {
 
 	private String name;
@@ -104,7 +105,7 @@ public class OreFinder implements HoldModifier {
 	}
 
 	@Override
-	public Component writeDetailsToLore(@Nullable Level level) {
+	public Component writeDetailsToLore() {
 
 		return null;
 	}

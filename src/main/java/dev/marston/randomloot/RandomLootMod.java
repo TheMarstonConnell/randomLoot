@@ -15,6 +15,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
@@ -86,7 +87,7 @@ public class RandomLootMod {
 		Globals.Seed = event.getServer().getWorldData().worldGenOptions().seed();
 	}
 
-	@Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+	@EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 	public static class ClientModEvents {
 		@SubscribeEvent
 		public static void onClientSetup(FMLClientSetupEvent event) {
@@ -101,7 +102,7 @@ public class RandomLootMod {
 		}
 	}
 
-	@Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+	@EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD)
 	public static class RegistryEvents {
 
 		@SubscribeEvent

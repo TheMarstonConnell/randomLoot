@@ -1,7 +1,6 @@
 package dev.marston.randomloot.loot;
 
 import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Multimap;
 import dev.marston.randomloot.Config;
 import dev.marston.randomloot.loot.modifiers.*;
 import net.minecraft.ChatFormatting;
@@ -19,15 +18,16 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -185,26 +185,27 @@ public class LootItem extends Item {
 			return false;
 		}
 
-		return state.is(blocks)
-				&& net.neoforged.neoforge.common.TierSortingRegistry.isCorrectTierForDrops(Tiers.DIAMOND, state);
+		return state.is(blocks);
 	}
 
 	@Override
-	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
+	public ItemAttributeModifiers getAttributeModifiers(ItemStack stack) {
 
-		if (!slot.equals(EquipmentSlot.MAINHAND)) {
-			return super.getAttributeModifiers(slot, stack);
+		if (!stack.getEquipmentSlot().equals(EquipmentSlot.MAINHAND)) {
+			return super.getAttributeModifiers(stack);
 		}
 
 		ToolType tt = LootUtils.getToolType(stack);
 
 		float damage = getAttackDamage(stack, tt);
 
-		ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier",
-				(double) damage, AttributeModifier.Operation.ADDITION));
-		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier",
-				(double) getAttackSpeed(stack, tt), AttributeModifier.Operation.ADDITION));
+
+
+		ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder();
+		builder.add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier",
+				damage, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
+		builder.add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier",
+				getAttackSpeed(stack, tt), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
 
 		return builder.build();
 	}
@@ -323,11 +324,7 @@ public class LootItem extends Item {
 		return true;
 	}
 
-	@Override
-	public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player) {
 
-		return super.onBlockStartBreak(itemstack, pos, player);
-	}
 
 	@Override
 	public int getMaxDamage(ItemStack stack) {
@@ -405,7 +402,7 @@ public class LootItem extends Item {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack item, @Nullable Level level, List<Component> tipList, TooltipFlag flag) {
+	public void appendHoverText(ItemStack item, Item.TooltipContext pContext, List<Component> tipList, TooltipFlag pTooltipFlag) {
 
 		boolean show = Screen.hasShiftDown();
 
@@ -444,7 +441,7 @@ public class LootItem extends Item {
 			}
 			modifier.writeToLore(tipList, show);
 			if (show) {
-				Component details = modifier.writeDetailsToLore(level);
+				Component details = modifier.writeDetailsToLore();
 
 				if (details != null) {
 					MutableComponent detailComp = makeComp(" - ", ChatFormatting.GRAY);

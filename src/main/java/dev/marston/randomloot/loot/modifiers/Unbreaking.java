@@ -36,7 +36,7 @@ public class Unbreaking implements Modifier {
 		list.add(comp);
 	}
 
-	public Component writeDetailsToLore(@Nullable Level level) {
+	public Component writeDetailsToLore() {
 		return null;
 	}
 

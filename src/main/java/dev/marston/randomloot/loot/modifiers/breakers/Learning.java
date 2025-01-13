@@ -108,7 +108,7 @@ public class Learning implements BlockBreakModifier {
 	}
 
 	@Override
-	public Component writeDetailsToLore(@Nullable Level level) {
+	public Component writeDetailsToLore() {
 
 		float amt = ((float) count) / ((float) max) * 100;
 		String perc = String.format("%.0f%% Learned", amt);

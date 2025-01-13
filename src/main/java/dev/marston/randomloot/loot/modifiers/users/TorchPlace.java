@@ -263,7 +263,7 @@ public class TorchPlace implements UseModifier {
 	}
 
 	@Override
-	public Component writeDetailsToLore(@Nullable Level level) {
+	public Component writeDetailsToLore() {
 
 		return null;
 	}

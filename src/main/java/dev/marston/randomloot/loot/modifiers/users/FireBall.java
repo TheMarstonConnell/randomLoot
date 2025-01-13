@@ -88,7 +88,7 @@ public class FireBall implements UseModifier {
 	}
 
 	@Override
-	public Component writeDetailsToLore(@Nullable Level level) {
+	public Component writeDetailsToLore() {
 
 		return null;
 	}

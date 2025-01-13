@@ -104,7 +104,7 @@ public class Charging implements EntityHurtModifier {
 	}
 
 	@Override
-	public Component writeDetailsToLore(@Nullable Level level) {
+	public Component writeDetailsToLore() {
 
 		if (level != null) {
 			float charge = getCharge(level);

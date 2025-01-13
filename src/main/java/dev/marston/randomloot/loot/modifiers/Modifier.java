@@ -67,7 +67,7 @@ public interface Modifier {
 
 	public void writeToLore(List<Component> list, boolean shift);
 
-	public Component writeDetailsToLore(@Nullable Level level);
+	public Component writeDetailsToLore();
 
 	public String description();
 

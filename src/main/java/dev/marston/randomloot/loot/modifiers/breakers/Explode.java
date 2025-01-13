@@ -93,7 +93,7 @@ public class Explode implements BlockBreakModifier {
 	}
 
 	@Override
-	public Component writeDetailsToLore(@Nullable Level level) {
+	public Component writeDetailsToLore() {
 
 		return null;
 	}

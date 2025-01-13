@@ -114,7 +114,7 @@ public class Attracting implements BlockBreakModifier {
 	}
 
 	@Override
-	public Component writeDetailsToLore(@Nullable Level level) {
+	public Component writeDetailsToLore() {
 
 		return null;
 	}
