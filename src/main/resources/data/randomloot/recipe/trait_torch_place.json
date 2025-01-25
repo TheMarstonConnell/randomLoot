@@ -2,7 +2,7 @@
   "type": "randomloot:trait_change",
   "item": {
     "count": 1,
-    "item": "minecraft:golden_apple"
+    "id": "minecraft:glowstone"
   },
-  "trait": "absorption"
+  "trait": "torch_place"
 }

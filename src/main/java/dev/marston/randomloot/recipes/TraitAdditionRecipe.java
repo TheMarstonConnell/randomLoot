@@ -1,146 +1,157 @@
-//package dev.marston.randomloot.recipes;
-//
-//import com.mojang.serialization.Codec;
-//import com.mojang.serialization.codecs.RecordCodecBuilder;
-//import dev.marston.randomloot.loot.LootRegistry;
-//import dev.marston.randomloot.loot.LootUtils;
-//import dev.marston.randomloot.loot.modifiers.Modifier;
-//import dev.marston.randomloot.loot.modifiers.ModifierRegistry;
-//import net.minecraft.core.RegistryAccess;
-//import net.minecraft.network.FriendlyByteBuf;
-//import net.minecraft.world.Container;
-//import net.minecraft.world.item.ItemStack;
-//import net.minecraft.world.item.crafting.Ingredient;
-//import net.minecraft.world.item.crafting.RecipeSerializer;
-//import net.minecraft.world.item.crafting.SmithingRecipe;
-//import net.minecraft.world.level.Level;
-//
-//import java.nio.charset.Charset;
-//
-//public class TraitAdditionRecipe implements SmithingRecipe {
-//	public static Serializer SERIALIZER = null;
-//
-//	final Ingredient item;
-//	final String trait;
-//
-//	public TraitAdditionRecipe(Ingredient item, String trait) {
-//		this.item = item;
-//		this.trait = trait;
-//	}
-//
-//	public boolean matches(Container inv, Level p_266781_) {
-//		ItemStack template = inv.getItem(0);
-//		if (!isTemplateIngredient(template)) { // we want an empty template
-//			return false;
-//		}
-//
-//		ItemStack base = inv.getItem(1);
-//		if (!isBaseIngredient(base)) {
-//			return false;
-//		}
-//
-//		ItemStack addition = inv.getItem(2);
-//		if (!isAdditionIngredient(addition)) {
-//			return false;
-//		}
-//
-//		return true;
-//
-//	}
-//
-//	public ItemStack assemble(Container inv, RegistryAccess p_266699_) {
-//
-//		ItemStack template = inv.getItem(0);
-//
-//		boolean shouldAdd = false;
-//		if (template.getItem() == LootRegistry.ModAdd) {
-//			shouldAdd = true;
-//		} else if (template.getItem() == LootRegistry.ModSub) {
-//			shouldAdd = false;
-//		} else {
-//			return ItemStack.EMPTY;
-//		}
-//
-//		ItemStack s = inv.getItem(1);
-//
-//		ItemStack itemstack = s.copy();
-//
-//		Modifier mod = ModifierRegistry.Modifiers.get(trait);
-//
-//		if (mod == null) {
-//			return ItemStack.EMPTY;
-//		}
-//
-//		if (shouldAdd) {
-//			itemstack = LootUtils.addModifier(itemstack, mod.clone());
-//		} else {
-//			itemstack = LootUtils.removeModifier(itemstack, mod.clone());
-//		}
-//
-//		return itemstack;
-//	}
-//
-//	public boolean isTemplateIngredient(ItemStack stack) {
-//		return stack.getItem() == LootRegistry.ModAdd || stack.getItem() == LootRegistry.ModSub;
-//	}
-//
-//	public boolean isBaseIngredient(ItemStack stack) {
-//		return stack.getItem() == LootRegistry.ToolItem;
-//	}
-//
-//	public boolean isAdditionIngredient(ItemStack stack) {
-//		return item.test(stack);
-//	}
-//
-//	@Override
-//	public RecipeSerializer<? extends SmithingRecipe> getSerializer() {
-//		return getMySerializer();
-//	}
-//
-//	public static RecipeSerializer<?> getMySerializer() {
-//		if (SERIALIZER == null) {
-//			SERIALIZER = new Serializer();
-//		}
-//		return SERIALIZER;
-//	}
-//
-//	public static class Serializer implements RecipeSerializer<TraitAdditionRecipe> {
-//
-//		private static final Codec<TraitAdditionRecipe> CODEC = RecordCodecBuilder.create((p_297394_) -> {
-//			return p_297394_.group(Ingredient.CODEC.fieldOf("item").forGetter((p_298441_) -> {
-//				return p_298441_.item;
-//			}), Codec.STRING.fieldOf("trait").forGetter((p_299309_) -> {
-//				return p_299309_.trait;
-//			})).apply(p_297394_, TraitAdditionRecipe::new);
-//		});
-//
-//		public Codec<TraitAdditionRecipe> codec() {
-//			return CODEC;
-//		}
-//
-//		public TraitAdditionRecipe fromNetwork(FriendlyByteBuf buffer) {
-//
-//			Ingredient ingredient = Ingredient.fromNetwork(buffer);
-//			int l = buffer.readInt(); // getting length
-//			String trait = buffer.readCharSequence(l, Charset.forName("utf-8")).toString();
-//
-//			TraitAdditionRecipe t = new TraitAdditionRecipe(ingredient, trait);
-//
-//			return t;
-//		}
-//
-//		public void toNetwork(FriendlyByteBuf buffer, TraitAdditionRecipe recipe) {
-//			recipe.item.toNetwork(buffer);
-//
-//			CharSequence s = recipe.trait;
-//			buffer.writeInt(s.length()); // length of string to track
-//			buffer.writeCharSequence(s, Charset.forName("utf-8"));
-//
-//		}
-//	}
-//
-//	@Override
-//	public ItemStack getResultItem(RegistryAccess p_267052_) {
-//		return ItemStack.EMPTY;
-//	}
-//}
+package dev.marston.randomloot.recipes;
+
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import java.util.List;
+import java.util.Optional;
+import javax.annotation.Nullable;
+
+import dev.marston.randomloot.RandomLoot;
+import dev.marston.randomloot.items.ModItems;
+import dev.marston.randomloot.loot.LootUtils;
+import dev.marston.randomloot.loot.modifiers.Modifier;
+import dev.marston.randomloot.loot.modifiers.ModifierRegistry;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.display.RecipeDisplay;
+import net.minecraft.world.item.crafting.display.SlotDisplay;
+import net.minecraft.world.item.crafting.display.SmithingRecipeDisplay;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
+
+public class TraitAdditionRecipe implements SmithingRecipe {
+	final ItemStack addition;
+	final Optional<Ingredient> template;
+	final Optional<Ingredient> base;
+	final String trait;
+	@Nullable
+	private PlacementInfo placementInfo;
+
+	public TraitAdditionRecipe(ItemStack addition, String traitIn) {
+		RandomLoot.LOGGER.info("LOADING ADDITION RECIPE!");
+		this.addition = addition;
+		this.trait = traitIn;
+		this.base = Optional.of(Ingredient.of(ModItems.TOOL.asItem()));
+		this.template= Optional.of(Ingredient.of(ModItems.MOD_SUB.asItem(), ModItems.MOD_ADD.asItem()));
+	}
+
+	@Override
+	public boolean matches(SmithingRecipeInput input, Level level) {
+		RandomLoot.LOGGER.info("TESTING ADDITION RECIPE!");
+
+		if (!input.base().is(ModItems.TOOL.asItem())) {
+			return false;
+		}
+
+		if (!this.addition.is(input.addition().getItem())) {
+			return false;
+		}
+
+        return this.template.get().test(input.template());
+    }
+
+	private ItemStack getResult(SmithingRecipeInput input) {
+
+			ItemStack tool = input.base();
+
+			ItemStack template = input.template();
+
+			ItemStack stack = LootUtils.CloneItem(tool);
+
+			Modifier modToAdd = ModifierRegistry.Modifiers.get(this.trait);
+			
+			if (template.is(ModItems.MOD_ADD.asItem())) {
+				LootUtils.addModifier(stack, modToAdd);
+			} else if (template.is(ModItems.MOD_SUB.asItem())) {
+				LootUtils.removeModifier(stack, modToAdd);
+			}
+			
+			
+			return stack;
+	}
+
+
+
+
+	public ItemStack assemble(SmithingRecipeInput input, HolderLookup.Provider provider) {
+
+		return this.getResult(input);
+	}
+
+	@Override
+	public Optional<Ingredient> templateIngredient() {
+		return this.template;
+	}
+
+	@Override
+	public Optional<Ingredient> baseIngredient() {
+		return this.base;
+	}
+
+	@Override
+	public Optional<Ingredient> additionIngredient() {
+
+		return Optional.of(Ingredient.of(this.addition.getItem()));
+	}
+
+	@Override
+	public @NotNull RecipeSerializer<TraitAdditionRecipe> getSerializer() {
+		return Recipies.TRAIT_ADDITION_RECIPE.get();
+	}
+
+	@Override
+	public PlacementInfo placementInfo() {
+		if (this.placementInfo == null) {
+			this.placementInfo = PlacementInfo.createFromOptionals(List.of(this.template, this.base, this.additionIngredient()));
+		}
+
+		return this.placementInfo;
+	}
+
+	@Override
+	public List<RecipeDisplay> display() {
+		return List.of(
+				new SmithingRecipeDisplay(
+						Ingredient.optionalIngredientToDisplay(this.template),
+						Ingredient.optionalIngredientToDisplay(this.base),
+						new SlotDisplay.ItemSlotDisplay(this.addition.getItem()),
+						Ingredient.optionalIngredientToDisplay(this.base),
+						new SlotDisplay.ItemSlotDisplay(Items.SMITHING_TABLE)
+				)
+		);
+	}
+
+	public static class Serializer implements RecipeSerializer<TraitAdditionRecipe> {
+		private static final MapCodec<TraitAdditionRecipe> CODEC = RecordCodecBuilder.mapCodec(
+				builder -> builder.group(
+								ItemStack.CODEC.fieldOf("item").forGetter(g -> g.addition),
+								Codec.STRING.fieldOf("trait").forGetter(g -> g.trait)
+						)
+						.apply(builder, TraitAdditionRecipe::new)
+		);
+		public static final StreamCodec<RegistryFriendlyByteBuf, TraitAdditionRecipe> STREAM_CODEC = StreamCodec.composite(
+				ItemStack.STREAM_CODEC,
+				c -> c.addition,
+				ByteBufCodecs.STRING_UTF8,
+				c -> c.trait,
+				TraitAdditionRecipe::new
+		);
+
+		@Override
+		public MapCodec<TraitAdditionRecipe> codec() {
+			return CODEC;
+		}
+
+		@Override
+		public StreamCodec<RegistryFriendlyByteBuf, TraitAdditionRecipe> streamCodec() {
+			return STREAM_CODEC;
+		}
+	}
+}
+

@@ -2,7 +2,7 @@
   "type": "randomloot:trait_change",
   "item": {
     "count": 1,
-    "item": "minecraft:cracked_stone_bricks"
+    "id": "minecraft:diamond_pickaxe"
   },
-  "trait": "busted"
+  "trait": "veiny"
 }

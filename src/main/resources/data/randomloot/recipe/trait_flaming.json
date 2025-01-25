@@ -2,7 +2,7 @@
   "type": "randomloot:trait_change",
   "item": {
     "count": 1,
-    "item": "minecraft:obsidian"
+    "id": "minecraft:blaze_rod"
   },
-  "trait": "unbreaking"
+  "trait": "flaming"
 }

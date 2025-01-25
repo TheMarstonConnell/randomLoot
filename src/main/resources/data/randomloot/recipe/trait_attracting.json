@@ -2,7 +2,7 @@
   "type": "randomloot:trait_change",
   "item": {
     "count": 1,
-    "item": "minecraft:magma_cream"
+    "id": "minecraft:iron_block"
   },
-  "trait": "melting"
+  "trait": "attracting"
 }

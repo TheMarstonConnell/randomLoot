@@ -2,7 +2,7 @@
   "type": "randomloot:trait_change",
   "item": {
     "count": 1,
-    "item": "minecraft:book"
+    "id": "minecraft:flint_and_steel"
   },
-  "trait": "learning"
+  "trait": "fire_place"
 }

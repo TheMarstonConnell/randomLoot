@@ -2,7 +2,7 @@
   "type": "randomloot:trait_change",
   "item": {
     "count": 1,
-    "item": "minecraft:blaze_rod"
+    "id": "minecraft:tnt"
   },
-  "trait": "flaming"
+  "trait": "explode"
 }

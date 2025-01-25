@@ -2,7 +2,7 @@
   "type": "randomloot:trait_change",
   "item": {
     "count": 1,
-    "item": "minecraft:chorus_fruit"
+    "id": "minecraft:magma_cream"
   },
-  "trait": "combo"
+  "trait": "melting"
 }

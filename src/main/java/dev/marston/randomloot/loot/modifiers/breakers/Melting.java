@@ -10,18 +10,17 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.SmeltingRecipe;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 
+import java.util.Collection;
 import java.util.List;
 
 public class Melting implements BlockBreakModifier {
@@ -76,26 +75,40 @@ public class Melting implements BlockBreakModifier {
 
 						DummyContainer mc = new DummyContainer(stack);
 
-//						List<RecipeHolder<SmeltingRecipe>> recipes = manager.getRecipesFor(RecipeType.SMELTING, mc, l);
-//
-//						for (RecipeHolder<SmeltingRecipe> recipe : recipes) {
-//
-//							ItemStack result = recipe.value().getResultItem(access).copy();
-//
-//							if (result.isEmpty()) {
-//								continue;
-//							}
-//
-//							ItemEntity k = i.copy();
-//							k.setItem(result);
-//
-//							i.setPos(i.position().x, -1, i.position().z);
-//							i.kill();
-//
-//							l.addFreshEntity(k);
-//
-//							break;
-//						}
+						Level level = player.level();
+
+						if (level.isClientSide) {
+							return;
+						}
+
+						ServerLevel serverLevel = (ServerLevel) level;
+
+						RecipeManager manager = serverLevel.recipeAccess();
+
+						Collection<RecipeHolder<?>> recipes = manager.getRecipes();
+						List<SingleItemRecipe> smeltingRecipes = recipes.stream().map(RecipeHolder::value).filter(r -> r.getType() == RecipeType.SMELTING).map(r->(SingleItemRecipe)r).toList();
+
+						for (SingleItemRecipe recipe : smeltingRecipes) {
+							if (!recipe.matches(new SingleRecipeInput(stack), level)) {
+								continue;
+							}
+
+							ItemStack result = recipe.assemble(new SingleRecipeInput(stack), null);
+
+							if (result.isEmpty()) {
+								continue;
+							}
+
+							ItemEntity k = i.copy();
+							k.setItem(result);
+
+							i.setPos(i.position().x, -1, i.position().z);
+							i.kill(serverLevel);
+
+							l.addFreshEntity(k);
+
+							break;
+						}
 
 					}
 				}

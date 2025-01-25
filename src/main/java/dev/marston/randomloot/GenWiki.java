@@ -108,7 +108,7 @@ public class GenWiki {
 
     public static String readRecipe(String trait) throws FileNotFoundException {
         FileReader reader = new FileReader(
-                "../src/main/resources/data/randomloot/recipes/special/trait_" + trait + ".json");
+                "../src/main/resources/data/randomloot/recipe/trait_" + trait + ".json");
         Gson gson = new Gson();
         BufferedReader bufferedReader = new BufferedReader(reader);
 
@@ -119,7 +119,7 @@ public class GenWiki {
 
         JsonObject itemObj = item.getAsJsonObject();
 
-        String itemName = itemObj.get("item").getAsString();
+        String itemName = itemObj.get("id").getAsString();
 
         return itemName;
 

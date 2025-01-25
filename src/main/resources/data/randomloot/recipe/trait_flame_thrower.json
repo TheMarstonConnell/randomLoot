@@ -2,7 +2,7 @@
   "type": "randomloot:trait_change",
   "item": {
     "count": 1,
-    "item": "minecraft:cauldron"
+    "id": "minecraft:fire_charge"
   },
-  "trait": "rainy"
+  "trait": "flame_thrower"
 }

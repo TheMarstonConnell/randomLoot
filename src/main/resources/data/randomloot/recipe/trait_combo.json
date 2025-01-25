@@ -2,7 +2,7 @@
   "type": "randomloot:trait_change",
   "item": {
     "count": 1,
-    "item": "minecraft:spyglass"
+    "id": "minecraft:chorus_fruit"
   },
-  "trait": "detecting"
+  "trait": "combo"
 }

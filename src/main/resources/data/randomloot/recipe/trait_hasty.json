@@ -2,7 +2,7 @@
   "type": "randomloot:trait_change",
   "item": {
     "count": 1,
-    "item": "minecraft:flint_and_steel"
+    "id": "minecraft:sugar"
   },
-  "trait": "fire_place"
+  "trait": "hasty"
 }

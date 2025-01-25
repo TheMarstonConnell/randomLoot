@@ -53,6 +53,28 @@ public class LootUtils {
 	private static int SHOVEL_COUNT = 9;
 	private static int SWORD_COUNT = 47;
 
+	public static ItemStack CloneItem(ItemStack stack) {
+		ItemStack copy = new ItemStack(ModItems.TOOL.asItem());
+
+		ToolModifier copyMods = new ToolModifier(new HashMap<>());
+
+
+		@Nullable ToolModifier mods = stack.get(ModDataComponents.TOOL_MODIFIER);
+		if (mods == null) {
+			return copy;
+		}
+
+		Map<String, CompoundTag> ts = copyMods.getTags();
+
+		Map<String, CompoundTag> tags = mods.getTags();
+		tags.forEach((s, compoundTag) -> {
+			ts.put(s, compoundTag.copy());
+		});
+
+		copy.set(ModDataComponents.TOOL_MODIFIER, copyMods);
+		return copy;
+	}
+	
 	public static void addLoreLine(ListTag lore, String text, String color) {
 		JsonObject value = new JsonObject();
 

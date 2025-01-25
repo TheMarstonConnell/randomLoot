@@ -2,7 +2,7 @@
   "type": "randomloot:trait_change",
   "item": {
     "count": 1,
-    "item": "minecraft:tnt"
+    "id": "minecraft:cauldron"
   },
-  "trait": "explode"
+  "trait": "rainy"
 }

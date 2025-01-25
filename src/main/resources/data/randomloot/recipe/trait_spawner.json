@@ -2,7 +2,7 @@
   "type": "randomloot:trait_change",
   "item": {
     "count": 1,
-    "item": "minecraft:fire_charge"
+    "id": "minecraft:mossy_cobblestone"
   },
-  "trait": "flame_thrower"
+  "trait": "spawner"
 }

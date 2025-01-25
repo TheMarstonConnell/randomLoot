@@ -229,9 +229,9 @@ public class LootItem extends Item  {
 		boolean shouldSkipBreak = false;
 		for (Modifier mod : mods) {
 			if (mod instanceof EntityHurtModifier ehm) {
-//				addTagElement(stack,itEnabled(mod.tagName())) {
-//					continue;
-//				}
+				if (!Config.traitEnabled(mod.tagName())) {
+					continue;
+				}
 
                 if (ehm.hurtEnemy(itemstack, hurtee, hurter)) {
 					shouldSkipBreak = true;
