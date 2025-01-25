@@ -17,8 +17,8 @@ import java.util.Set;
 
 public class ModifierRegistry {
 
-	public static HashMap<String, Modifier> Modifiers = new HashMap<String, Modifier>();
-	public static HashMap<String, Boolean> ModifierEnabled = new HashMap<String, Boolean>();
+	public static HashMap<String, Modifier> Modifiers = new HashMap<>();
+	public static HashMap<String, Boolean> ModifierEnabled = new HashMap<>();
 
 	public static Modifier EXPLODE = register(new Explode());
 	public static Modifier LEARNING = register(new Learning());
@@ -57,12 +57,12 @@ public class ModifierRegistry {
 
 	public static Modifier UNBREAKING = register(new Unbreaking());
 
-	public static final Set<Modifier> BREAKERS = Set.of(EXPLODE, LEARNING, ATTRACTING, VEINY /**,MELTING*/);
+	public static final Set<Modifier> BREAKERS = Set.of(EXPLODE, LEARNING, ATTRACTING, VEINY, MELTING);
 	public static final Set<Modifier> USERS = Set.of(/**TORCH_PLACE, DIRT_PLACE,**/ FIRE_PLACE, FIRE_BALL);
 	public static final Set<Modifier> HURTERS = Set.of(CRITICAL, CHARGING, FLAMING, COMBO, DRAINING, POISONOUS,
 			WITHERING, BLINDING, BEZERK);
 	public static final Set<Modifier> HOLDERS = Set.of(HASTY, ABSORBTION, FILLING, RAINY, ORE_FINDER, SPAWNER_FINDER,
-			LIVING);
+			LIVING, REGENERATING, RESISTANT, FIRE_RESISTANT);
 
 	public static final Set<Modifier> STATS = Set.of(BUSTED);
 

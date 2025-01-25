@@ -50,6 +50,11 @@ public class TraitAdditionRecipe implements SmithingRecipe {
 		}
 
 		if (!this.addition.is(input.addition().getItem())) {
+
+			return false;
+		}
+
+		if (this.addition.getCount() > input.addition().getCount()) {
 			return false;
 		}
 

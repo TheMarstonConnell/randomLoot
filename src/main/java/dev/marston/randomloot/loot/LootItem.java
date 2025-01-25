@@ -51,18 +51,13 @@ public class LootItem extends Item  {
 
 		@Override
 		public String toString() {
-			switch (this) {
-			case PICKAXE:
-				return "Pickaxe";
-			case SHOVEL:
-				return "Shovel";
-			case AXE:
-				return "Axe";
-			case SWORD:
-				return "Sword";
-			default:
-				return "Null";
-			}
+            return switch (this) {
+                case PICKAXE -> "Pickaxe";
+                case SHOVEL -> "Shovel";
+                case AXE -> "Axe";
+                case SWORD -> "Sword";
+                default -> "Null";
+            };
 		}
 	}
 
