@@ -57,7 +57,7 @@ jobs:
           with:
             file_path: "build/libs/${{ steps.file_name.outputs.FILE_NAME }}"
             game_endpoint: "minecraft"
-            game_versions: "Minecraft 1.21:1.21.4,Java 17,Neoforge"
+            game_versions: "Minecraft 1.21:1.21.4,Java 17,NeoForge"
             token: "${{ secrets.CurseForge }}"
             project_id: "301631"
             display_name: "Random Loot 2 - ${{ steps.get_version.outputs.VERSION }}"
