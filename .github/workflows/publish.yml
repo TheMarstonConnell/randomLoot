@@ -21,6 +21,8 @@ jobs:
           with:
             java-version: '17'
             distribution: 'temurin'
+        - name: Change wrapper permissions
+          run: chmod +x ./gradlew
         - name: Get the version
           id: get_version
           run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\/v/}
