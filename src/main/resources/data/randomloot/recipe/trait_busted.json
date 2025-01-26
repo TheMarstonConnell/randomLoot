@@ -1,7 +1,7 @@
 {
   "type": "randomloot:trait_change",
   "item": {
-    "count": 1,
+    "count": 3,
     "id": "minecraft:cracked_stone_bricks"
   },
   "trait": "busted"

@@ -1,7 +1,7 @@
 {
   "type": "randomloot:trait_change",
   "item": {
-    "count": 1,
+    "count": 64,
     "id": "minecraft:dirt"
   },
   "trait": "dirt_place"

@@ -9,6 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.Level.ExplosionInteraction;
 
@@ -27,7 +28,7 @@ public class Explode implements BlockBreakModifier {
 
 	public Explode() {
 		this.name = "Explosive";
-		this.power = 2.0f;
+		this.power = 4.0f;
 	}
 
 	public Modifier clone() {
@@ -39,9 +40,7 @@ public class Explode implements BlockBreakModifier {
 
 		Level l = player.level();
 
-		l.explode(player, null, null, pos.getX(), pos.getY(), pos.getZ(), power, false, ExplosionInteraction.BLOCK
-        );
-
+		l.explode(player, Explosion.getDefaultDamageSource(l, player), null, pos.getX(), pos.getY() + 0.5, pos.getZ(), power, false, ExplosionInteraction.TNT);
 
 		return false;
 	}
