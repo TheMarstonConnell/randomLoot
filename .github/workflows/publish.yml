@@ -51,11 +51,11 @@ jobs:
             files: "build/libs/*.jar"
         
         - name: Upload to CurseForge
-          uses: itsmeow/curseforge-upload@3.1.1
+          uses: itsmeow/curseforge-upload@3.1.2
           with:
             file_path: "build/libs/${{ steps.file_name.outputs.FILE_NAME }}"
             game_endpoint: "minecraft"
-            game_versions: "Minecraft 1.20:1.20.2,Java 17,Forge"
+            game_versions: "Minecraft 1.21:1.21.4,Java 17,Neoforge"
             token: "${{ secrets.CurseForge }}"
             project_id: "301631"
             display_name: "Random Loot 2 - ${{ steps.get_version.outputs.VERSION }}"
@@ -70,6 +70,6 @@ jobs:
             files: build/libs/*.jar
             name: "Random Loot 2 - ${{ steps.get_version.outputs.VERSION }}"
             version-type: ${{ steps.release_type.outputs.RELEASE_TYPE }}
-            game-versions: "[1.20.2,)"
-            loaders: forge
+            game-versions: "[1.21.4,)"
+            loaders: neoforge
             java: 17

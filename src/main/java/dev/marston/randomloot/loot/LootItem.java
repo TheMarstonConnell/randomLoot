@@ -44,8 +44,6 @@ import java.util.Objects;
 
 public class LootItem extends Item  {
 
-
-
 	public enum ToolType {
 		PICKAXE, SHOVEL, AXE, SWORD, NULL;
 
@@ -187,6 +185,8 @@ public class LootItem extends Item  {
 		return state.is(blocks);
 	}
 
+
+
 	@Override
 	public @NotNull ItemAttributeModifiers getDefaultAttributeModifiers(ItemStack stack) {
 
@@ -196,17 +196,10 @@ public class LootItem extends Item  {
 
 		ToolType tt = LootUtils.getToolType(stack);
 
-		float damage = getAttackDamage(stack, tt);
-
-
-
-		ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder();
-		builder.add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID,
-				damage, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
-		builder.add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID,
-				getAttackSpeed(stack, tt), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
-
-		return builder.build();
+		return ItemAttributeModifiers.builder().add(
+				Attributes.ATTACK_DAMAGE, new AttributeModifier(Item.BASE_ATTACK_DAMAGE_ID, getAttackDamage(stack, tt), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+				.add(Attributes.ATTACK_SPEED, new AttributeModifier(Item.BASE_ATTACK_SPEED_ID, getAttackSpeed(stack, tt), AttributeModifier.Operation.ADD_VALUE),
+						EquipmentSlotGroup.MAINHAND).build();
 	}
 
 	@Override
