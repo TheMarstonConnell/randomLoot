@@ -59,9 +59,9 @@ public class LootUtils {
 	}
 
 	private static int PICKAXE_COUNT = 18;
-	private static int AXE_COUNT = 12;
+	private static int AXE_COUNT = 14;
 	private static int SHOVEL_COUNT = 9;
-	private static int SWORD_COUNT = 47;
+	private static int SWORD_COUNT = 50;
 
 	public static ItemStack CloneItem(ItemStack stack) {
 		ItemStack copy = new ItemStack(ModItems.TOOL.asItem());

@@ -282,6 +282,20 @@
                 }
             },
             {
+                "threshold": 0.3012,
+                "model": {
+                    "type": "minecraft:model",
+                    "model": "randomloot:item/tools/axe/13"
+                }
+            },
+            {
+                "threshold": 0.3013,
+                "model": {
+                    "type": "minecraft:model",
+                    "model": "randomloot:item/tools/axe/14"
+                }
+            },
+            {
                 "threshold": 0.4,
                 "model": {
                     "type": "minecraft:model",
@@ -608,6 +622,27 @@
                 "model": {
                     "type": "minecraft:model",
                     "model": "randomloot:item/tools/sword/47"
+                }
+            },
+            {
+                "threshold": 0.4047,
+                "model": {
+                    "type": "minecraft:model",
+                    "model": "randomloot:item/tools/sword/48"
+                }
+            },
+            {
+                "threshold": 0.4048,
+                "model": {
+                    "type": "minecraft:model",
+                    "model": "randomloot:item/tools/sword/49"
+                }
+            },
+            {
+                "threshold": 0.4049,
+                "model": {
+                    "type": "minecraft:model",
+                    "model": "randomloot:item/tools/sword/50"
                 }
             }
         ]
