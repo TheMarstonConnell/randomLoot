@@ -34,7 +34,6 @@ public class TraitAdditionRecipe implements SmithingRecipe {
 	private PlacementInfo placementInfo;
 
 	public TraitAdditionRecipe(ItemStack addition, String traitIn) {
-		RandomLoot.LOGGER.info("LOADING ADDITION RECIPE!");
 		this.addition = addition;
 		this.trait = traitIn;
 		this.base = Optional.of(Ingredient.of(ModItems.TOOL.asItem()));
@@ -43,7 +42,6 @@ public class TraitAdditionRecipe implements SmithingRecipe {
 
 	@Override
 	public boolean matches(SmithingRecipeInput input, Level level) {
-		RandomLoot.LOGGER.info("TESTING ADDITION RECIPE!");
 
 		if (!input.base().is(ModItems.TOOL.asItem())) {
 			return false;
@@ -54,9 +52,9 @@ public class TraitAdditionRecipe implements SmithingRecipe {
 			return false;
 		}
 
-		if (this.addition.getCount() > input.addition().getCount()) {
-			return false;
-		}
+//		if (this.addition.getCount() > input.addition().getCount()) {
+//			return false;
+//		}
 
         return this.template.get().test(input.template());
     }
@@ -85,7 +83,6 @@ public class TraitAdditionRecipe implements SmithingRecipe {
 
 
 	public ItemStack assemble(SmithingRecipeInput input, HolderLookup.Provider provider) {
-
 		return this.getResult(input);
 	}
 
@@ -98,6 +95,8 @@ public class TraitAdditionRecipe implements SmithingRecipe {
 	public Optional<Ingredient> baseIngredient() {
 		return this.base;
 	}
+
+
 
 	@Override
 	public Optional<Ingredient> additionIngredient() {

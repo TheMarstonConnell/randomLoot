@@ -38,7 +38,7 @@ public class GenWiki {
 
         write("**id:** `" + tag + "` | **crafting:** `" + recipe + "` ![" + stripItemName(recipe)
                 + "](https://raw.githubusercontent.com/anish-shanbhag/minecraft-api/master/public/images/items/"
-                + stripItemName(recipe) + ".png) | **needs:** `" + count + "`", f);
+                + stripItemName(recipe) + ".png)", f);
         write("", f);
         write("**Decription:** " + m.description(), f);
     }

@@ -1,20 +1,29 @@
 package dev.marston.randomloot.loot;
 
 import com.google.gson.JsonObject;
+import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import dev.marston.randomloot.Config;
+import dev.marston.randomloot.RandomLoot;
 import dev.marston.randomloot.component.ModDataComponents;
 import dev.marston.randomloot.component.ToolModifier;
 import dev.marston.randomloot.items.ModItems;
 import dev.marston.randomloot.loot.LootItem.ToolType;
 import dev.marston.randomloot.loot.modifiers.Modifier;
 import dev.marston.randomloot.loot.modifiers.ModifierRegistry;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.item.properties.numeric.RangeSelectItemModelProperty;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.StatType;
@@ -27,6 +36,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
+import org.apache.logging.log4j.core.tools.picocli.CommandLine;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -58,7 +68,6 @@ public class LootUtils {
 
 		ToolModifier copyMods = new ToolModifier(new HashMap<>());
 
-
 		@Nullable ToolModifier mods = stack.get(ModDataComponents.TOOL_MODIFIER);
 		if (mods == null) {
 			return copy;
@@ -72,6 +81,9 @@ public class LootUtils {
 		});
 
 		copy.set(ModDataComponents.TOOL_MODIFIER, copyMods);
+
+		copy.set(DataComponents.CUSTOM_NAME, stack.get(DataComponents.CUSTOM_NAME));
+
 		return copy;
 	}
 	
@@ -88,19 +100,17 @@ public class LootUtils {
 	}
 
 	public static void setItemName(ItemStack stack, String name, String color) {
-		JsonObject value = new JsonObject();
+		MutableComponent comp = Component.literal(name);
+		RandomLoot.LOGGER.info("COLOR: " + color);
 
-		value.addProperty("text", name);
-		value.addProperty("color", color);
-		value.addProperty("italic", false);
+		Style style = Style.EMPTY;
+		style = style.withItalic(false);
+		DataResult<TextColor> col = TextColor.parseColor(color);
+		style = style.withColor(col.getOrThrow());
 
-		StringTag nbtName = StringTag.valueOf(value.toString());
+		comp = comp.withStyle(style);
 
-		CompoundTag display = getOrCreateTagElement(stack,"display");
-
-		display.put("Name", nbtName);
-
-		addTagElement(stack,"display", display);
+		stack.set(DataComponents.CUSTOM_NAME, comp);
 	}
 
 	public static void setItemLore(ItemStack stack, String lore) {

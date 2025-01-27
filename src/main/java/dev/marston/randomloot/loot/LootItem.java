@@ -2,6 +2,7 @@ package dev.marston.randomloot.loot;
 
 import com.mojang.serialization.MapCodec;
 import dev.marston.randomloot.Config;
+import dev.marston.randomloot.RandomLoot;
 import dev.marston.randomloot.items.ModItems;
 import dev.marston.randomloot.loot.modifiers.*;
 import net.minecraft.ChatFormatting;
@@ -9,6 +10,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.item.properties.numeric.RangeSelectItemModelProperty;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
@@ -37,10 +39,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class LootItem extends Item  {
 
@@ -58,6 +57,7 @@ public class LootItem extends Item  {
             };
 		}
 	}
+
 
 	public LootItem(Properties p) {
 		super(p.stacksTo(1).durability(100));
@@ -186,19 +186,17 @@ public class LootItem extends Item  {
 	}
 
 
-
 	@Override
 	public @NotNull ItemAttributeModifiers getDefaultAttributeModifiers(ItemStack stack) {
 
-		if (!Objects.equals(stack.getEquipmentSlot(), EquipmentSlot.MAINHAND)) {
-			return super.getDefaultAttributeModifiers(stack);
-		}
-
 		ToolType tt = LootUtils.getToolType(stack);
 
+		float attack = getAttackDamage(stack, tt);
+		float speed = getAttackSpeed(stack, tt);
+
 		return ItemAttributeModifiers.builder().add(
-				Attributes.ATTACK_DAMAGE, new AttributeModifier(Item.BASE_ATTACK_DAMAGE_ID, getAttackDamage(stack, tt), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
-				.add(Attributes.ATTACK_SPEED, new AttributeModifier(Item.BASE_ATTACK_SPEED_ID, getAttackSpeed(stack, tt), AttributeModifier.Operation.ADD_VALUE),
+				Attributes.ATTACK_DAMAGE, new AttributeModifier(Item.BASE_ATTACK_DAMAGE_ID, attack, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+				.add(Attributes.ATTACK_SPEED, new AttributeModifier(Item.BASE_ATTACK_SPEED_ID, speed, AttributeModifier.Operation.ADD_VALUE),
 						EquipmentSlotGroup.MAINHAND).build();
 	}
 
