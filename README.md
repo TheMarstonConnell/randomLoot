@@ -46,4 +46,4 @@ The jump from 1.12 to 1.16 was one of the biggest changes to Forge & the Minecra
 Check the changelog [here](https://github.com/TheMarstonConnell/randomloot/blob/main/CHANGELOG.md)
 
 ## Credits
-Thank you to Sprucefence, Xiruen, and Zorbyn for donating tool textures.
+Thank you to Sprucefence, Xiruen, Victorium and Zorbyn for donating tool textures.
