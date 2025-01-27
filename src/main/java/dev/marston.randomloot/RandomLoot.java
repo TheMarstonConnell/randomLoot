@@ -43,6 +43,7 @@ public class RandomLoot
 
         ModItems.register(modEventBus);
         Recipies.register(modEventBus);
+        ModLootModifiers.register(modEventBus);
 
         NeoForge.EVENT_BUS.register(this);
         modEventBus.addListener(ModItems::addCreative);
