@@ -103,7 +103,7 @@ public class FireBall implements UseModifier {
 	}
 
 	@Override
-	public void use(Level level, Player player, InteractionHand hand) {
+	public boolean use(Level level, Player player, InteractionHand hand) {
 
 		double d1 = 2.5D;
 		Vec3 vec3 = player.getLookAngle();
@@ -116,7 +116,7 @@ public class FireBall implements UseModifier {
 
 		player.getItemInHand(hand).hurtAndBreak(this.damage, player, EquipmentSlot.MAINHAND);
 
-		return;
+		return true;
 	}
 
 	@Override

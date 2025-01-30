@@ -159,8 +159,8 @@ public class FirePlace implements UseModifier {
 	}
 
 	@Override
-	public void use(Level level, Player player, InteractionHand hand) {
-		return;
+	public boolean use(Level level, Player player, InteractionHand hand) {
+		return true;
 	}
 
 	@Override

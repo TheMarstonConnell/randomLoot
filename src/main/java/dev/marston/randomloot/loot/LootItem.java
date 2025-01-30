@@ -341,11 +341,7 @@ public class LootItem extends Item  {
 	public @NotNull InteractionResult use(@NotNull Level level, Player player, @NotNull InteractionHand hand) {
 		ItemStack toolItem = player.getItemInHand(hand);
 
-		if (player instanceof ServerPlayer sPlayer) {
-            StatType<Item> itemUsed = Stats.ITEM_USED;
-
-			sPlayer.getStats().increment(sPlayer, itemUsed.get(ModItems.TOOL.get()), 1);
-		}
+		boolean used = false;
 
 		List<Modifier> mods = LootUtils.getModifiers(toolItem);
 
@@ -357,15 +353,25 @@ public class LootItem extends Item  {
 				}
 
                 if (um.useAnywhere()) {
-					um.use(level, player, hand);
+					used = used || um.use(level, player, hand);
 				}
 			}
 
 		}
 
-		player.awardStat(Stats.ITEM_USED.get(this));
+		if (used) {
+			if (player instanceof ServerPlayer sPlayer) {
+				StatType<Item> itemUsed = Stats.ITEM_USED;
 
-		return InteractionResult.SUCCESS;
+				sPlayer.getStats().increment(sPlayer, itemUsed.get(ModItems.TOOL.get()), 1);
+			}
+
+			player.awardStat(Stats.ITEM_USED.get(this));
+
+			return InteractionResult.SUCCESS;
+		}
+
+		return InteractionResult.PASS;
 	}
 
 	private MutableComponent makeComp(String text, ChatFormatting color) {

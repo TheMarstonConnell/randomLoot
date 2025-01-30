@@ -8,7 +8,7 @@ import net.minecraft.world.level.Level;
 public interface UseModifier extends Modifier {
 	public void use(UseOnContext ctx);
 
-	public void use(Level level, Player player, InteractionHand hand);
+	public boolean use(Level level, Player player, InteractionHand hand);
 
 	public boolean useAnywhere();
 }
