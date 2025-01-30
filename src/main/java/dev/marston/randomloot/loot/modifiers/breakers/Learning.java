@@ -57,7 +57,7 @@ public class Learning implements BlockBreakModifier {
 			player.giveExperiencePoints(this.points);
 		}
 
-		LootUtils.addModifier(itemstack, this);
+		LootUtils.updateModifier(itemstack, this);
 		return false;
 	}
 

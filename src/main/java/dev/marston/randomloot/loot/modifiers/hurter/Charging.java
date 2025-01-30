@@ -32,7 +32,7 @@ public class Charging implements EntityHurtModifier {
 
 	public Charging() {
 		this.name = "Charged";
-		this.points = 7;
+		this.points = 10;
 		this.charged = 0;
 	}
 
@@ -79,10 +79,8 @@ public class Charging implements EntityHurtModifier {
 
 	@Override
 	public void writeToLore(List<Component> list, boolean shift) {
-
 		MutableComponent comp = Modifier.makeComp(this.name(), this.color());
 		list.add(comp);
-
 	}
 
 	private float getCharge(Level level) {
@@ -140,10 +138,11 @@ public class Charging implements EntityHurtModifier {
 				lb.setCause((ServerPlayer) hurter);
 			}
 
+
 			level.addFreshEntity(lb);
 
 			this.charged = time;
-			LootUtils.addModifier(itemstack, this);
+			LootUtils.updateModifier(itemstack, this);
 		}
 
 		return false;

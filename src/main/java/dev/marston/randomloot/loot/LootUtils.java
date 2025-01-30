@@ -304,6 +304,22 @@ public class LootUtils {
 
 	}
 
+	public static void updateModifier(ItemStack item, Modifier mod) {
+
+		CompoundTag modifiers = getOrCreateTagElement(item,Modifier.MODTAG);
+
+		boolean oldModFound = modifiers.contains(mod.tagName()); // does that tag already exist on the tool?
+
+		if (!oldModFound) { // tag doesn't exist so we're adding a new trait.
+			return;
+		}
+
+		modifiers.put(mod.tagName(), mod.toNBT());
+
+		removeTagKey(item,Modifier.MODTAG);
+		addTagElement(item,Modifier.MODTAG, modifiers);
+	}
+
 	public static ItemStack removeModifier(ItemStack item, Modifier mod) {
 
 		CompoundTag modifiers = getOrCreateTagElement(item,Modifier.MODTAG);
@@ -377,7 +393,7 @@ public class LootUtils {
 	}
 
 	private static void generateLore(ItemStack lootItem, Level level, Player player) {
-		String nameColor = "#c0c7d1";
+		String nameColor = "#50ab4b";
 		float temp = 0.7f;
 
 		if (player != null) {
@@ -387,7 +403,6 @@ public class LootUtils {
 
 			temp = b.getBaseTemperature();
 
-			nameColor = String.format("#%06X", (0xFFFFFF & b.getFoliageColor()));
 			if (level.dimension().equals(Level.NETHER)) {
 				nameColor = "#FF8C19";
 			} else if (level.dimension().equals(Level.END)) {
@@ -622,60 +637,60 @@ public class LootUtils {
 	public static String roman(int input) {
 		if (input < 1 || input > 3999)
 			return "Invalid Roman Number Value";
-		String s = "";
+		StringBuilder s = new StringBuilder();
 		while (input >= 1000) {
-			s += "M";
+			s.append("M");
 			input -= 1000;
 		}
 		while (input >= 900) {
-			s += "CM";
+			s.append("CM");
 			input -= 900;
 		}
 		while (input >= 500) {
-			s += "D";
+			s.append("D");
 			input -= 500;
 		}
 		while (input >= 400) {
-			s += "CD";
+			s.append("CD");
 			input -= 400;
 		}
 		while (input >= 100) {
-			s += "C";
+			s.append("C");
 			input -= 100;
 		}
 		while (input >= 90) {
-			s += "XC";
+			s.append("XC");
 			input -= 90;
 		}
 		while (input >= 50) {
-			s += "L";
+			s.append("L");
 			input -= 50;
 		}
 		while (input >= 40) {
-			s += "XL";
+			s.append("XL");
 			input -= 40;
 		}
 		while (input >= 10) {
-			s += "X";
+			s.append("X");
 			input -= 10;
 		}
 		while (input >= 9) {
-			s += "IX";
+			s.append("IX");
 			input -= 9;
 		}
 		while (input >= 5) {
-			s += "V";
+			s.append("V");
 			input -= 5;
 		}
 		while (input >= 4) {
-			s += "IV";
+			s.append("IV");
 			input -= 4;
 		}
 		while (input >= 1) {
-			s += "I";
+			s.append("I");
 			input -= 1;
 		}
-		return s;
+		return s.toString();
 
 	}
 

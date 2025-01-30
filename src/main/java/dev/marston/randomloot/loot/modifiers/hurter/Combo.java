@@ -145,7 +145,7 @@ public class Combo implements EntityHurtModifier {
 		}
 
 		this.charged = time;
-		LootUtils.addModifier(itemstack, this);
+		LootUtils.updateModifier(itemstack, this);
 
 		return false;
 	}
